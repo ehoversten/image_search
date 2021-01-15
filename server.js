@@ -1,12 +1,8 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
+
 require("dotenv").config();
-
-// const API = require("./utils");
-
-// Configure Pexels API
-const pexels = require('pexels');
-const client = pexels.createClient(process.env.API_KEY);
+const API = require("./utils/API");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -44,7 +40,7 @@ app.post('/api', (req, res) => {
     // Store query string
     let query = req.body.search;
     // Make API request
-    client.photos.search({ query, per_page: 5 })
+    API.search({ query, per_page: 5 })
         .then(data => {
             let photos_data = data.photos;
             // console.log(photos_data);
