@@ -21,7 +21,8 @@ app.use(express.static('assets'));
 app.engine('handlebars', exphbs({ defaultLayout: "main" }));
 app.set('view engine', 'handlebars');
 
-
+// -- TEMP DATA SET -- //
+let dataSet = [];
 
 // -- ROUTES -- //
 app.get('/', (req, res) => {
@@ -31,19 +32,29 @@ app.get('/', (req, res) => {
 
 
 app.get('/api', (req, res) => {
-    const query = 'Nature';
+    // -- TESTING -- //
+    console.log("*******");
+    console.log(dataSet);
+
+    res.render('index', { allImages: dataSet });
+});
+
+app.post('/api', (req, res) => {
+
+    // Store query string
+    let query = req.body.search;
+    console.log(query);
+    // Make API request
     client.photos.search({ query, per_page: 5 })
         .then(data => {
-            console.log(data) 
-            let photos = data.photos;
-            console.log(photos[0]);
-            // console.log(photos[0].url);
-            // console.log(photos[0].photographer);
-            // console.log(photos[0].src);
-            // res.json(photos);
-            res.render('index', { allImages: photos })
+            let photos_data = data.photos;
+            console.log(photos_data);
+            dataSet = photos_data;
+            res.redirect('/api');
+        }).catch(err => {
+            console.log(err);
         });
-})
+});
 
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);

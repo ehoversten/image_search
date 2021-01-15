@@ -4,10 +4,11 @@
             <h1>Welcome to Image Search</h1>
             <p>powered by Pexels API</p>
 
-            <form>
+            <form action="/api" method="POST">
                 <div class="mb-3">
                     <label for="search" class="form-label">Search Images</label>
-                    <input type="text" class="form-control" id="search" aria-describedby="searchQuery">
+                    <input type="text" class="form-control" id="search" name="search" value=""
+                        aria-describedby="searchQuery">
                     <div id="emailHelp" class="form-text">Enter search string</div>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -15,7 +16,7 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row mt-3">
         <div class="col-md-12">
             <div id="images">
                 {{#each allImages}}
