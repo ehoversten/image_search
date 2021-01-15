@@ -1,7 +1,13 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
+require("dotenv").config();
 
-const API = require("./utils");
+// const API = require("./utils");
+
+// Configure Pexels API
+const pexels = require('pexels');
+const client = pexels.createClient(process.env.API_KEY);
+
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -25,7 +31,8 @@ app.get('/', (req, res) => {
 
 
 app.get('/api', (req, res) => {
-
+    const query = 'Nature';
+    client.photos.search({ query, per_page: 5 }).then(photos => console.log(photos));
     let data = 0;
     res.json(data);
 })
@@ -33,3 +40,7 @@ app.get('/api', (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);
 });
+
+
+
+
