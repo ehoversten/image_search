@@ -32,9 +32,17 @@ app.get('/', (req, res) => {
 
 app.get('/api', (req, res) => {
     const query = 'Nature';
-    client.photos.search({ query, per_page: 5 }).then(photos => console.log(photos));
-    let data = 0;
-    res.json(data);
+    client.photos.search({ query, per_page: 5 })
+        .then(data => {
+            console.log(data) 
+            let photos = data.photos;
+            console.log(photos[0]);
+            // console.log(photos[0].url);
+            // console.log(photos[0].photographer);
+            // console.log(photos[0].src);
+            // res.json(photos);
+            res.render('index', { allImages: photos })
+        });
 })
 
 app.listen(PORT, () => {

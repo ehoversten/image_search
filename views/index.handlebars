@@ -1,1 +1,28 @@
-<h1>Welcome to Image Search</h1>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h1>Welcome to Image Search</h1>
+            <p>powered by Pexels API</p>
+
+            <form>
+                <div class="mb-3">
+                    <label for="search" class="form-label">Search Images</label>
+                    <input type="text" class="form-control" id="search" aria-describedby="searchQuery">
+                    <div id="emailHelp" class="form-text">Enter search string</div>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div id="images">
+                {{#each allImages}}
+                <img src="{{ this.src.medium }}" alt="">
+                <p>Photograph By <a href="{{ this.photographer_url }}">{{ this.photographer }}</a></p>
+                {{/each }}
+            </div>
+        </div>
+    </div>
+</div>
