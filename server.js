@@ -54,6 +54,16 @@ app.post('/api', (req, res) => {
         });
 });
 
+app.post('/favorite', (req, res) => {
+
+    let newFavorite = {
+        photographer: req.body.photographer,
+        photographer_url: req.body.photographer_url,
+        photo_url: req.body.photo_url
+    }
+
+});
+
 
 // Sync the Database and start Express server
 db.sequelize.sync().then(function() {

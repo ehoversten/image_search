@@ -22,6 +22,12 @@
                 {{#each allImages}}
                 <img src="{{ this.src.medium }}" alt="">
                 <p>Photograph By <a href="{{ this.photographer_url }}">{{ this.photographer }}</a></p>
+                <form action="/favorite" method="POST">
+                    <input type="hidden" name="photographer" value="{{ this.photographer }}">
+                    <input type="hidden" name="photographer_url" value="{{ this.photographer_url }}">
+                    <input type="hidden" name="photo_url" value="{{ this.src.medium }}">
+                    <button type="submit" class="btn btn-danger">Save</button>
+                </form>
                 {{/each }}
             </div>
         </div>
