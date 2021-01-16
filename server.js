@@ -29,7 +29,7 @@ app.get('/', (req, res) => {
 app.get('/api', (req, res) => {
     // -- TESTING -- //
     console.log("*******");
-    console.log(dataSet);
+    // console.log(dataSet);
 
     res.render('index', { allImages: dataSet });
 });
@@ -61,7 +61,15 @@ app.post('/favorite', (req, res) => {
         photographer_url: req.body.photographer_url,
         photo_url: req.body.photo_url
     }
-
+    // Save Object to DB
+    db.Favorite.create(newFavorite)
+        .then(favorite => {
+            // console.log(favorite);
+            // res.redirect('/api');
+        })
+        .catch(err => {
+            console.log(err);
+        });
 });
 
 
