@@ -1,5 +1,6 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
+const db = require("./models");
 
 require("dotenv").config();
 const API = require("./utils/API");
@@ -16,7 +17,7 @@ app.use(express.static('assets'));
 app.engine('handlebars', exphbs({ defaultLayout: "main" }));
 app.set('view engine', 'handlebars');
 
-// -- TEMP DATA SET -- Database coming ... //
+// -- Array to load API images-- //
 const dataSet = [];
 
 // -- ROUTES -- //
@@ -28,7 +29,7 @@ app.get('/', (req, res) => {
 app.get('/api', (req, res) => {
     // -- TESTING -- //
     console.log("*******");
-    console.log(dataSet);
+    // console.log(dataSet);
 
     res.render('index', { allImages: dataSet });
 });
@@ -53,8 +54,57 @@ app.post('/api', (req, res) => {
         });
 });
 
-app.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}`);
+app.get('/favorites', (req, res) => {
+    let favorites = [];
+
+    db.Favorite.findAll()
+        .then(data => {
+            data.map(elem => favorites.push(elem.dataValues));
+            // console.log(favorites);
+            res.render('favorites', { allFavorites: favorites });
+        })
+        .catch(err => {
+            console.log(err);
+        });
+});
+
+app.post('/favorite', (req, res) => {
+
+    let newFavorite = {
+        photographer: req.body.photographer,
+        photographer_url: req.body.photographer_url,
+        photo_url: req.body.photo_url
+    }
+    // Save Object to DB
+    db.Favorite.create(newFavorite)
+        .then(favorite => {
+            // console.log(favorite);
+            console.log("Saved new image to favorites");
+        })
+        .catch(err => {
+            console.log(err);
+        });
+});
+
+app.post('/remove', (req, res) => {
+    console.log(req.body.photo_id);
+    let photo_id = req.body.photo_id
+    db.Favorite.destroy({ where: { id: photo_id }})
+        .then(data => {
+            // console.log(data);
+            res.redirect("/favorites");
+        })
+        .catch(err => {
+            console.log(err);
+        });
+});
+
+
+// Sync the Database and start Express server
+db.sequelize.sync().then(function() {
+    app.listen(PORT, () => {
+        console.log(`Server listening on port ${PORT}`);
+    });
 });
 
 

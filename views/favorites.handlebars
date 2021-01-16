@@ -1,0 +1,17 @@
+<div class="container">
+    <div class="row">
+        <h1>Favorites Page</h1>
+        <div class="col-md-12">
+            <div id="images">
+                {{#each allFavorites}}
+                <img src="{{ this.photo_url }}" alt="">
+                <p>Photograph By <a href="{{ this.photographer_url }}">{{ this.photographer }}</a></p>
+                <form action="/remove" method="POST">
+                    <input type="hidden" name="photo_id" value="{{ this.id }}">
+                    <button type="submit" class="btn btn-danger">Remove</button>
+                </form>
+                {{/each }}
+            </div>
+        </div>
+    </div>
+</div>
