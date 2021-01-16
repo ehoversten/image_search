@@ -1,5 +1,7 @@
 # Project: Node Image Search
 
+### Live Application : [Image Search](https://blooming-scrubland-70778.herokuapp.com/)
+
 &nbsp;
 
 ## Description:
@@ -14,7 +16,9 @@ Simple image search application that displays a series of photographs along with
 - Bootstrap CSS
 - Node / Express
 - Handlebars
-- Utilizes third party API data
+- MySQL Database
+- Sequelize ORM
+- Utilizes third party API data (Pexels API)
 
 &nbsp;
 
@@ -32,7 +36,7 @@ User can enter a search term into the form input and hit submit. User will then 
 ## Instructions:
 
 
-Clone the project repo.
+To run the project locally start by cloning the project repository. [Clone Image Search](https://github.com/ehoversten/image_search.git)
 
 Change directory into the saved project directory then in your terminal run the following:
 
@@ -40,7 +44,26 @@ Change directory into the saved project directory then in your terminal run the 
 npm install
 ```
 
-Once the project dependencies are installed, start the program by running:
+Make sure that you create a MySQL locally on your machine. Open your favorite SQL database tool and create the database:
+```SQL
+CREATE DATABASE image_favorites;
+```
+
+Open the application code in your favorite text editor and update the `config.json` file to your machines specifications:
+```json
+
+"development": {
+    "username": "<YOUR_MACHINE_USERNAME>",
+    "password": "<YOUR_MACHINE_PASSWORD>",
+    "database": "image_favorites",  // <-- If you called your DATABASE something else update it here!
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "operatorsAliases": false
+}
+
+```
+
+Once the project dependencies are installed, and the database settings are configured, start the program by running:
 
 ```javascript
 npm run start
@@ -48,7 +71,7 @@ npm run start
 
 &nbsp;
 
-To try out the application functionality follow the link: http://#
+Open your favorite web browser and navigate to http://localhost:3000/
 
 &nbsp;
 

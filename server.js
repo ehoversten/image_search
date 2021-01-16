@@ -22,8 +22,8 @@ const dataSet = [];
 
 // -- ROUTES -- //
 app.get('/', (req, res) => {
-    console.log("Hit Landing Page");
-    res.render("index", {});
+    // console.log("Hit Landing Page");
+    res.render("index");
 });
 
 app.get('/api', (req, res) => {
