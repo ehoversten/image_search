@@ -17,7 +17,7 @@ app.use(express.static('assets'));
 app.engine('handlebars', exphbs({ defaultLayout: "main" }));
 app.set('view engine', 'handlebars');
 
-// -- TEMP DATA SET -- Database coming ... //
+// -- Array to load API images-- //
 const dataSet = [];
 
 // -- ROUTES -- //
@@ -59,10 +59,8 @@ app.get('/favorites', (req, res) => {
 
     db.Favorite.findAll()
         .then(data => {
-            // console.log(data);
-            // let results = data.dataValues;
             data.map(elem => favorites.push(elem.dataValues));
-            console.log(favorites);
+            // console.log(favorites);
             res.render('favorites', { allFavorites: favorites });
         })
         .catch(err => {
@@ -81,7 +79,20 @@ app.post('/favorite', (req, res) => {
     db.Favorite.create(newFavorite)
         .then(favorite => {
             // console.log(favorite);
-            console.log("Saved new image to favorites")
+            console.log("Saved new image to favorites");
+        })
+        .catch(err => {
+            console.log(err);
+        });
+});
+
+app.post('/remove', (req, res) => {
+    console.log(req.body.photo_id);
+    let photo_id = req.body.photo_id
+    db.Favorite.destroy({ where: { id: photo_id }})
+        .then(data => {
+            // console.log(data);
+            res.redirect("/favorites");
         })
         .catch(err => {
             console.log(err);
