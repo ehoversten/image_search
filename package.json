@@ -1,11 +1,11 @@
 {
   "name": "image_search",
   "version": "1.0.0",
-  "description": "",
+  "description": "Simple image search application that displays a series of photographs along with the name of the photographer that submitted them. Application utilizes a Node/Express backend and displays requested data with the aid of the Handlebars template view engine. Image data is retrieved using the Pexels third party developer API.",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "start": "node server.js",
+    "watch": "nodemon server.js"
   },
   "repository": {
     "type": "git",
