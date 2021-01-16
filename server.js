@@ -1,5 +1,6 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
+const db = require("./models");
 
 require("dotenv").config();
 const API = require("./utils/API");
@@ -53,8 +54,12 @@ app.post('/api', (req, res) => {
         });
 });
 
-app.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}`);
+
+// Sync the Database and start Express server
+db.sequelize.sync().then(function() {
+    app.listen(PORT, () => {
+        console.log(`Server listening on port ${PORT}`);
+    });
 });
 
 
