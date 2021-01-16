@@ -54,6 +54,22 @@ app.post('/api', (req, res) => {
         });
 });
 
+app.get('/favorites', (req, res) => {
+    let favorites = [];
+
+    db.Favorite.findAll()
+        .then(data => {
+            // console.log(data);
+            // let results = data.dataValues;
+            data.map(elem => favorites.push(elem.dataValues));
+            console.log(favorites);
+            res.render('favorites', { allFavorites: favorites });
+        })
+        .catch(err => {
+            console.log(err);
+        });
+});
+
 app.post('/favorite', (req, res) => {
 
     let newFavorite = {
@@ -65,7 +81,7 @@ app.post('/favorite', (req, res) => {
     db.Favorite.create(newFavorite)
         .then(favorite => {
             // console.log(favorite);
-            // res.redirect('/api');
+            console.log("Saved new image to favorites")
         })
         .catch(err => {
             console.log(err);
