@@ -10,7 +10,14 @@
                     <label for="search" class="form-label">Search Images</label>
                     <input type="text" class="form-control" id="search" name="search" value=""
                         aria-describedby="searchQuery">
-                    <div id="emailHelp" class="form-text">Enter search string</div>
+                    <div id="searchHelp" class="form-text">Enter search string</div>
+                    <select class="form-select mt-2" aria-label="Default select" name="select">
+                        <option selected>Select Number of Images</option>
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
                 </div>
                 <button type="submit" class="btn btn-primary">Search</button>
             </form>
