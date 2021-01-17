@@ -16,10 +16,12 @@ router.post('/', (req, res) => {
     // Empty data array
     dataSet.splice(0);
 
-    // Store query string
+    // Store query string and Number of Images requested
     let query = req.body.search;
+    let imageNumber = parseInt(req.body.select);
+
     // Make API request
-    API.search({ query, per_page: 36 })
+    API.search({ query, per_page: imageNumber })
         .then(data => {
             let photos_data = data.photos;
             // Load data set
