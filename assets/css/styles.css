@@ -3,10 +3,14 @@ body {
     margin: 0;
 }
 
-#favorites {
-    border: 2px solid darkgrey;
-}
-
 .color {
     color: #e47b19;
+}
+
+.fav-btn {
+    float: right;
+}
+
+#rmv-btn {
+    float: right !important;
 }
