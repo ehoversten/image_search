@@ -7,10 +7,9 @@
                 <div class="card">
                     <img src="{{ this.photo_url }}" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <p class="card-text">Photograph By <a href="{{ this.photographer_url }}">{{
-                                this.photographer}}</a>
+                        <p class="card-text">Photograph By <a href="{{ this.photographer_url }}">{{ this.photographer }}</a>
                         </p>
-                        <form action="/api/remove" method="POST">
+                        <form action="/api/remove" method="POST" id="rmv-btn">
                             <input type="hidden" name="photo_id" value="{{ this.id }}">
                             <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
                         </form>
