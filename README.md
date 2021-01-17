@@ -28,7 +28,11 @@ User can enter a search term into the form input and hit submit. User will then 
 
 &nbsp;
 
-![image search](./assets/img/image_search.png)
+![landing page](./assets/img/image_landing.png)
+#
+![image search](./assets/img/search.png)
+#
+![favorites](./assets/img/favorites.png)
 
 
 &nbsp;
