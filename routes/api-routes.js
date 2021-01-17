@@ -4,16 +4,11 @@ const router = express.Router();
 var db = require("../models");
 const API = require("../utils/API");
 
-
 // -- Array to load API images-- //
 const dataSet = [];
 
 // -- ROUTES -- //
 router.get('/', (req, res) => {
-    // -- TESTING -- //
-    // console.log("*******");
-    // console.log(dataSet);
-
     res.render('index', { allImages: dataSet });
 });
 
@@ -27,8 +22,6 @@ router.post('/', (req, res) => {
     API.search({ query, per_page: 36 })
         .then(data => {
             let photos_data = data.photos;
-            // console.log(photos_data);
-
             // Load data set
             photos_data.map(elem => dataSet.push(elem));
             res.redirect('/api');
@@ -43,7 +36,6 @@ router.get('/favorites', (req, res) => {
     db.Favorite.findAll()
         .then(data => {
             data.map(elem => favorites.push(elem.dataValues));
-            // console.log(favorites);
             res.render('favorites', { allFavorites: favorites });
         })
         .catch(err => {
@@ -61,7 +53,6 @@ router.post('/favorite', (req, res) => {
     // Save Object to DB
     db.Favorite.create(newFavorite)
         .then(favorite => {
-            // console.log(favorite);
             console.log("Saved new image to favorites");
         })
         .catch(err => {
@@ -74,7 +65,6 @@ router.post('/remove', (req, res) => {
     let photo_id = req.body.photo_id
     db.Favorite.destroy({ where: { id: photo_id }})
         .then(data => {
-            // console.log(data);
             res.redirect("/favorites");
         })
         .catch(err => {

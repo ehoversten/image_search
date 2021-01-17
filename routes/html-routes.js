@@ -4,7 +4,6 @@ const router = express.Router();
 
 // -- ROUTES -- //
 router.get('/', (req, res) => {
-    // console.log("Hit Landing Page");
     res.render("index");
 });
 
