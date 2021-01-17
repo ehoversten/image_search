@@ -65,7 +65,7 @@ router.post('/remove', (req, res) => {
     let photo_id = req.body.photo_id
     db.Favorite.destroy({ where: { id: photo_id }})
         .then(data => {
-            res.redirect("/favorites");
+            res.redirect("/api/favorites");
         })
         .catch(err => {
             console.log(err);

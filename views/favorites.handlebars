@@ -1,17 +1,24 @@
-<div class="container">
-    <div class="row">
+<div class="container mt-4">
+    <div class="row justify-content-center">
         <h1>Favorites Page</h1>
-        <div class="col-md-12">
-            <div id="images">
-                {{#each allFavorites}}
-                <img src="{{ this.photo_url }}" alt="">
-                <p>Photograph By <a href="{{ this.photographer_url }}">{{ this.photographer }}</a></p>
-                <form action="/remove" method="POST">
-                    <input type="hidden" name="photo_id" value="{{ this.id }}">
-                    <button type="submit" class="btn btn-danger">Remove</button>
-                </form>
-                {{/each }}
+        <a href="/"><button class="btn btn-success">Search Images</button></a>
+        <div class="card-group mt-3">
+            {{#each allFavorites}}
+            <div class="col-sm-4">
+                <div class="card">
+                    <img src="{{ this.photo_url }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <p class="card-text">Photograph By <a href="{{ this.photographer_url }}">{{
+                                this.photographer}}</a>
+                        </p>
+                        <form action="/api/remove" method="POST">
+                            <input type="hidden" name="photo_id" value="{{ this.id }}">
+                            <button type="submit" class="btn btn-danger">Remove</button>
+                        </form>
+                    </div>
+                </div>
             </div>
+            {{/each }}
         </div>
     </div>
 </div>
